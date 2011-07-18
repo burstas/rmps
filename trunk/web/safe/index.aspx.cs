@@ -12,7 +12,7 @@ using me.amon.util;
 public partial class cipher_Index : System.Web.UI.Page
 {
     #region 全局常量
-    private int imgSize = 24;
+    private int imgSize = 16;
     private const string CAT_DIGEST = "digest";
     private const string CAT_CONFUSE = "confuse";
     private const string CAT_PRIVATE = "private";
@@ -33,11 +33,15 @@ public partial class cipher_Index : System.Web.UI.Page
             return;
         }
 
-        ImMd.ImageUrl = "~/img/switch" + imgSize + ".png";
-        ImMd.Width = imgSize;
-        ImMd.Height = imgSize;
+        IbMd.ImageUrl = "~/_img/safe/switch" + imgSize + ".png";
+        IbMd.Width = imgSize;
+        IbMd.Height = imgSize;
 
-        ImMd.Attributes["Checked"] = "False";
+        ImKd.Src = "~/_img/safe/wizard" + imgSize + ".png";
+        ImKd.Width = imgSize;
+        ImKd.Height = imgSize;
+
+        IbMd.Attributes["Checked"] = "False";
         CbMf.Visible = false;
         CbMl.Visible = false;
 
@@ -350,8 +354,8 @@ public partial class cipher_Index : System.Web.UI.Page
     /// </summary>
     private void ChangeSource()
     {
-        string md = (ImMd.Attributes["Checked"] ?? "False").ToLower();
-        ImMd.Attributes["Checked"] = ("true" == md ? "False" : "True");
+        string md = (IbMd.Attributes["Checked"] ?? "False").ToLower();
+        IbMd.Attributes["Checked"] = ("true" == md ? "False" : "True");
     }
 
     /// <summary>
@@ -512,18 +516,7 @@ public partial class cipher_Index : System.Web.UI.Page
             PublicDecrypt(TaSt.Text);
         }
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    private RSACryptoServiceProvider AssignParameter()
-    {
-        CspParameters cspParams = new CspParameters();
-        cspParams.KeyContainerName = "MeAmonContainer";
-        cspParams.Flags = CspProviderFlags.UseMachineKeyStore;
-        cspParams.ProviderName = "Microsoft Strong Cryptographic Provider";
-        return new RSACryptoServiceProvider(cspParams);
-    }
+
     /// <summary>
     /// 加密
     /// </summary>
@@ -532,52 +525,27 @@ public partial class cipher_Index : System.Web.UI.Page
     private void PublicEncrypt(string source)
     {
         RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-        TbUp.Text = rsa.ToXmlString(true);
+        rsa.FromXmlString(TbUp.Text);
 
-        //read plaintext, encrypt it to ciphertext
+        byte[] srcBytes = String2Bytes(source);
+        byte[] dstBytes = rsa.Encrypt(srcBytes, false);
 
-        //byte[] plainbytes = String2Bytes(source);
-        //byte[] cipherbytes = rsa.Encrypt(plainbytes, false);
-        //return EncodeBytes(cipherbytes);
+        TaDt.Text = EncodeBytes(dstBytes);
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    private void AssignNewKey()
-    {
-        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
 
-        //provide public and private RSA params
-        StreamWriter writer = new StreamWriter(@"C:\Inetpub\wwwroot\dotnetspiderencryption\privatekey.xml");
-        string publicPrivateKeyXML = rsa.ToXmlString(true);
-        writer.Write(publicPrivateKeyXML);
-        writer.Close();
-
-        //provide public only RSA params
-        writer = new StreamWriter(@"C:\Inetpub\wwwroot\dotnetspiderencryption\publickey.xml");
-        string publicOnlyKeyXML = rsa.ToXmlString(false);
-        writer.Write(publicOnlyKeyXML);
-        writer.Close();
-    }
     /// <summary>
     /// 解密
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>
-    private string PublicDecrypt(string source)
+    private void PublicDecrypt(string source)
     {
         RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+        rsa.FromXmlString(TbUp.Text);
 
-        byte[] getpassword = DecodeBytes(source);
-
-        StreamReader reader = new StreamReader(@"C:\Inetpub\wwwroot\dotnetspiderencryption\privatekey.xml");
-        string publicPrivateKeyXML = reader.ReadToEnd();
-        rsa.FromXmlString(publicPrivateKeyXML);
-        reader.Close();
-
-        //read ciphertext, decrypt it to plaintext
-        byte[] plain = rsa.Decrypt(getpassword, false);
-        return Bytes2String(plain);
+        byte[] srcBytes = DecodeBytes(source);
+        byte[] dstBytes = rsa.Decrypt(srcBytes, false);
+        TaDt.Text = Bytes2String(dstBytes);
     }
     #endregion
 
@@ -870,7 +838,7 @@ public partial class cipher_Index : System.Web.UI.Page
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected void ImMd_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+    protected void IbMd_Click(object sender, System.Web.UI.ImageClickEventArgs e)
     {
         string srcText = TaSt.Text;
         string dstText = TaDt.Text;

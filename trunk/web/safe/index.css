@@ -7,7 +7,7 @@
 }
 body
 {
-    background-color: #fafafa;
+    background-color: #000;
 }
 textarea
 {
@@ -29,6 +29,15 @@ textarea
     font-weight: bold;
     padding: 0.4em 0;
 }
+#LbErr1
+{
+    color: #F00;
+}
+.Txt
+{
+    position: relative;
+    z-index: 1;
+}
 .Btn
 {
     background: url(../img/button.png) repeat-x scroll 0 50% #222222;
@@ -47,7 +56,67 @@ textarea
     background: none repeat scroll 0 0 #111111;
     color: #FFFFFF;
 }
-#LbErr1
+.BgTl
 {
-    color: #F00;
+    background-image: url(../_img/safe/bgtl.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    height: 62px;
+    width: 12px;
+}
+.BgTm
+{
+    background-image: url(../_img/safe/bgtm.png);
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    height: 62px;
+}
+.BgTr
+{
+    background-image: url(../_img/safe/bgtr.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    height: 62px;
+    width: 12px;
+}
+.BgMl
+{
+    background-image: url(../_img/safe/bgml.png);
+    background-repeat: repeat-y;
+    background-position: right center;
+    width: 12px;
+}
+.BgMm
+{
+    background-color: #FFF;
+}
+.BgMr
+{
+    background-image: url(../_img/safe/bgmr.png);
+    background-repeat: repeat-y;
+    background-position: left center;
+    width: 12px;
+}
+.BgBl
+{
+    background-image: url(../_img/safe/bgbl.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+    height: 62px;
+    width: 12px;
+}
+.BgBm
+{
+    background-image: url(../_img/safe/bgbm.png);
+    background-repeat: repeat-x;
+    background-position: center top;
+    height: 62px;
+}
+.BgBr
+{
+    background-image: url(../_img/safe/bgbr.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 62px;
+    width: 12px;
 }
