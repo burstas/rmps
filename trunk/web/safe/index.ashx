@@ -22,7 +22,7 @@ public class index : IHttpHandler, IRequiresSessionState
 
     public void ProcessRequest(HttpContext context)
     {
-        context.Response.ContentType = "text/plain";
+        context.Response.ContentType = "text/javascript";
         Request = context.Request;
         Response = context.Response;
         Session = context.Session;
@@ -38,6 +38,13 @@ public class index : IHttpHandler, IRequiresSessionState
 
         if (encrypt)
         {
+            // 输入文本
+            if (string.IsNullOrEmpty(ut))
+            {
+                Write("ut", "请输入明文！");
+                return;
+            }
+
             // 加密方案
             if (string.IsNullOrEmpty(ms) || "0" == ms)
             {
@@ -49,13 +56,6 @@ public class index : IHttpHandler, IRequiresSessionState
             if (string.IsNullOrEmpty(mf) || "0" == mf)
             {
                 Write("mf", "请选择一个加密算法！");
-                return;
-            }
-
-            // 输入文本
-            if (string.IsNullOrEmpty(ut))
-            {
-                Write("ut", "请输入明文！");
                 return;
             }
         }
@@ -95,7 +95,10 @@ public class index : IHttpHandler, IRequiresSessionState
 
     private void Write(string value, string error)
     {
-        Response.Write(string.Format("{'value':{0},'error':{1}}", value ?? "", error ?? ""));
+        StringBuilder buf = new StringBuilder();
+        buf.Append("{\"value\":\"").Append(value ?? "").Append("\",");
+        buf.Append(" \"error\":\"").Append(error ?? "").Append("\"}");
+        Response.Write(buf.ToString());
         Response.End();
     }
 

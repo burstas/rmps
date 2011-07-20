@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="cipher_Index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="cipher_Index" EnableEventValidation="true" %>
 
 <!doctype html>
 <html>
@@ -76,7 +76,7 @@
             </td>
             <td class="BgMm" style="height: 20px;">
                 <%-- User Password用户口令 --%>
-                <asp:TextBox ID="TbUp" runat="server" ToolTip="用户口令(P)" AccessKey="P"></asp:TextBox>
+                <asp:TextBox ID="TbUk" runat="server" ToolTip="用户口令(P)" AccessKey="P"></asp:TextBox>
             </td>
             <td class="BgMr">
             </td>
@@ -85,7 +85,7 @@
             <td class="BgBl">
             </td>
             <td class="BgBm" align="center">
-                <asp:Button ID="BtDo" runat="server" CssClass="Btn" Text="执行(R)" AccessKey="R" />
+                <input type=button id="BtDo" class="Btn" value="执行(R)" accesskey="R" />
                 <asp:Button ID="BtOp" runat="server" CssClass="Btn" />
             </td>
             <td class="BgBr">

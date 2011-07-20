@@ -49,6 +49,77 @@ $('#IbKd').click(function()
 		});
     return false;
 });
+$('#BtDo').click(function()
+{
+    var oc=$('#TaSt');
+    var ut=oc.val();
+    if(!ut)
+    {
+        alert('请输入明文！');
+        oc.focus();
+        return false;
+    }
+    
+    oc=$('#CbMc');
+    var ms=oc.val();
+    if(!ms)
+    {
+        alert('请选择一个加密方案！');
+        oc.focus();
+        return false;
+    }
+    
+    oc=$('#CbMf');
+    var mf=oc.val();
+    if(!mf)
+    {
+        alert('请选择一个加密算法！');
+        oc.focus();
+        return false;
+    }
+    
+    oc=$('#TbUk');
+    var uk=oc.val();
+    if(!uk)
+    {
+        alert("请输入口令！");
+        oc.focus();
+        return false;
+    }
+    
+    $.ajax(
+    {
+	    type:"post",
+	    url:"index.ashx",
+	    data:{'ms':ms,'mf':mf,'mm':'cbc','mc':'0','ut':ut,'uk':uk},
+	    dataType:'json',
+	    beforeSend:function(XMLHttpRequest)
+	    {
+		    //ShowLoading();
+	    },
+	    success:function(data, textStatus, jqXHR)
+	    {
+	        alert('suc');
+	        if(data.error)
+	        {
+	            alert(data.error);
+	            return;
+	        }
+	        $('#TaDt').val(data.value);
+	    },
+	    complete:function(jqXHR, textStatus)
+	    {
+		    //HideLoading();
+		    alert('ok');
+	    },
+	    error:function(jqXHR, textStatus, errorThrown)
+	    {
+	        alert(errorThrown);
+		    //请求出错处理
+	    }
+    });
+    return false;
+});
 function ChangeAction()
 {
     var hdn=$('#HdMd')
@@ -90,7 +161,7 @@ $('#CbMc').change(function ChangeMethod()
             ml.hide();
             return;
         }
-        if (item.Value == CAT_PRIVATE)
+        if (mc=='private')
         {
             mf.append('<option value="DES">DES</option>');
             mf.append('<option value="TripleDES">三重DES</option>');
@@ -100,14 +171,14 @@ $('#CbMc').change(function ChangeMethod()
             ml.hide();
             return;
         }
-        if (item.Value == CAT_PUBLIC)
+        if (mc=='public')
         {
             mf.append('<option value="RSA">RSA</option>');
             mf.show();
             ml.hide();
             return;
         }
-        if (item.Value == CAT_DIGITAL)
+        if (mc=='digital')
         {
             mf.append('<option value="RSA">RSA</option>');
             mf.append('<option value="DSA">DSA</option>');
