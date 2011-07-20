@@ -19,25 +19,6 @@ public partial class index : Page
             return;
         }
 
-        // 网络导航快捷访问
-        if (Regex.IsMatch(Request.RawUrl, "/index\\.aspx\\?/[0-9A-Za-z_-]{1,8}$"))
-        {
-            String uri = rmp.wrp.link.Link.Read(Request.RawUrl.Substring(12));
-            if (rmp.util.StringUtil.isValidate(uri))
-            {
-                Response.Redirect(uri);
-            }
-            new rmp.io.db.DBAccess().UpdateStep(cons.io.db.prp.PrpCons.P3070100, cons.io.db.prp.PrpCons.P3070104, uri, cons.io.db.prp.PrpCons.P3070101, 1);
-            return;
-        }
-
-        // 计算助理快捷访问
-        if (Regex.IsMatch(Request.RawUrl, "/index\\.aspx\\?=.+$"))
-        {
-            Server.Transfer("~/math/math0001.aspx?math=" + Request.RawUrl.Substring(13));
-            return;
-        }
-
         if (!SiteGuid())
         {
             LoadData();

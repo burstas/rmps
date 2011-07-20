@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Web.UI;
 using rmp.io.db;
 using rmp.util;
-using rmp.wrp.soft;
 
 public partial class mpwd_index : Page
 {
@@ -31,14 +30,14 @@ public partial class mpwd_index : Page
         {
             DataRow row = dataList.Rows[0];
 
-            lb_SoftVers.Text = row[cons.io.db.comn.ComnCons.C0010105] + "（" + Soft.GetStrategy((int)row[cons.io.db.comn.ComnCons.C0010102]) + "）";
+            lb_SoftVers.Text = row[cons.io.db.comn.ComnCons.C0010105].ToString();
             lb_PubsTime.Text = row[cons.io.db.comn.ComnCons.C0010107].ToString();
             String down = row[cons.io.db.comn.ComnCons.C001010F].ToString();
             hl_DownWinJ.NavigateUrl = down + "_win_with_jre.zip";
             hl_DownWinN.NavigateUrl = down + "_win.zip";
-			hl_DownMac.NavigateUrl = down + "_mac.zip";
+            hl_DownMac.NavigateUrl = down + "_mac.zip";
             hl_DownLnx.NavigateUrl = down + "_lin.zip";
-			hl_DownAll.NavigateUrl = down + "_all.zip";
+            hl_DownAll.NavigateUrl = down + "_all.zip";
             hl_SoftJnlp.NavigateUrl = row[cons.io.db.comn.ComnCons.C0010110].ToString();
             hl_Win.NavigateUrl = String.Format("~/_images/{0}/3000_w03.png", sid);
             hl_Lin.NavigateUrl = String.Format("~/_images/{0}/3000_l01.png", sid);

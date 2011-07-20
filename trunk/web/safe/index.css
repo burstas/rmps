@@ -1,30 +1,32 @@
 ﻿*
 {
-    font-family: Arial, "Arial Black" , "宋体" , "微软雅黑" , Terminal, Courier;
-    font-size: 12px;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 body
 {
     background-color: #000;
+    font-family: Arial, "Arial Black" , "宋体" , "微软雅黑" , Terminal, Courier;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
 }
 textarea
 {
+    margin: 5px;
+    font-family: Arial, "Arial Black" , "宋体" , "微软雅黑" , Terminal, Courier;
+    font-size: 12px;
+}
+iframe
+{
+    border: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-}
-#TbUp, TbCt
-{
-    width: 100%;
-}
-#TextUpdate
-{
-    height: 100%;
+    overflow: hidden;
 }
 #TbUp
 {
+    width: 100%;
     font-size: 1.2em;
     font-weight: bold;
     padding: 0.4em 0;

@@ -94,30 +94,6 @@
                                         <table width="200" border="0" cellpadding="2" cellspacing="0">
                                             <tr>
                                                 <td align="center" class="TD_LIST_HEAD">
-                                                    友情链接
-                                                </td>
-                                            </tr>
-                                            <% foreach (rmp.bean.K1V2 link in rmp.wrp.link.Link.MpwdLink)
-                                               {%>
-                                            <tr>
-                                                <td align="left" class="TD_LIST_BODY">
-                                                    ·&nbsp;<a href="<%= link.K %>" title="<%= link.V2 %>" target="_blank"><%= link.V1%></a>
-                                                </td>
-                                            </tr>
-                                            <%}%>
-                                            <tr>
-                                                <td align="right" class="TD_LIST_FOOT">
-                                                    <a href="/link/link1001.aspx?sid=sctvraydxttvfdrb" title="更多友情链接">更多</a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
-                                        <table width="200" border="0" cellpadding="2" cellspacing="0">
-                                            <tr>
-                                                <td align="center" class="TD_LIST_HEAD">
                                                     在线关注
                                                 </td>
                                             </tr>
